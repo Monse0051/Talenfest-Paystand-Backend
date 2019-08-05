@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // When deploy change port to 8080
-const port = 8080;
+//const port = 8080;
 
 const Payment = require('./pay');
 const payment = new Payment();
@@ -58,4 +58,4 @@ app.post('/pay', (req, res)=> {
     });
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(process.env.PORT || 8080);
