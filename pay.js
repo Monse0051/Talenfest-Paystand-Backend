@@ -1,5 +1,8 @@
 const requestPromise = require('request-promise-native');
 const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const XCUSTOMER_ID = process.env.XCOSTUMER_ID;
+
 
 class Payment {
   constructor() {
@@ -32,8 +35,8 @@ class Payment {
       },
       body: {
         grant_type: "client_credentials",
-        client_id: clientId,
-        client_secret: clientSecret,
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
         scope: "auth"
       },
       json: true
@@ -43,16 +46,16 @@ class Payment {
    /**
    * Private method that returns token object which includes URL, header and body.
    * @param {string} auth: authentification token  
-   * @param {string} xCustomerId: alphanumeric id
+   * @param {string} XCUSTOMER_ID: alphanumeric id
    * @param {object} data: user billing data
    * @returns {object} token
    */   
-  _createPaymentOptions(auth, xCustomerId, data) {
+  _createPaymentOptions(auth, XCUSTOMER_ID, data) {
     return {
       url: this.URL_PAYMENTS,
       headers: {
         Authorization: auth,
-        'X-CUSTOMER-ID': xCustomerId,
+        'X-CUSTOMER-ID': XCUSTOMER_ID,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -67,8 +70,8 @@ class Payment {
   _fetchKeys() {
     return {
       CLIENT_ID,
-      client_secret: 'dbc17981950c3ded3aea051110cc05d562659209',
-      xCustomerId: 'ody8bd9st5qpq8619vj3j173'
+      CLIENT_SECRET,
+      XCUSTOMER_ID
     };
   }
 
@@ -78,7 +81,7 @@ class Payment {
    */
   _authenticate() {
     const keys = this._fetchKeys();
-    const options = this._createTokenOptions(keys.CLIENT_ID, keys.client_secret);
+    const options = this._createTokenOptions(keys.CLIENT_ID, keys.CLIENT_SECRET);
 
     return requestPromise.post(options)
       .then(tokenInfo => {
@@ -99,7 +102,7 @@ class Payment {
 
     return this._authenticate()
       .then(accessToken => {
-        const options = this._createPaymentOptions(accessToken, keys.xCustomerId, this.data);
+        const options = this._createPaymentOptions(accessToken, keys.XCUSTOMER_ID, this.data);
         return requestPromise.post(options);
       })
       .then(response => {
