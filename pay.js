@@ -1,12 +1,12 @@
 const requestPromise = require('request-promise-native');
-
+const CLIENT_ID = process.env.CLIENT_ID;
 
 class Payment {
   constructor() {
     this.data = null;
     this.URL_AUTH = 'https://api.paystand.co/v3/oauth/token';
     this.URL_PAYMENTS = 'https://api.paystand.co/v3/payments/secure';
-    this.CLIENT_ID = process.env.CLIENT_ID;
+    
   }
 
   /**
