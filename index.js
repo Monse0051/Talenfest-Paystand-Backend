@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 // body-parser configuration
 // FIXME: warning: body-parser deprecated undefined extended: provide extended option app.js:5:20
+app.use(cors())
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
