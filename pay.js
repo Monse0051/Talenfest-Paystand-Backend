@@ -1,7 +1,7 @@
 const requestPromise = require('request-promise-native');
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const XCUSTOMER_ID = process.env.XCOSTUMER_ID;
+const XCUSTOMER_ID = process.env.XCUSTOMER_ID;
 
 
 class Payment {
