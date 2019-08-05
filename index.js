@@ -51,7 +51,7 @@ app.get('/', (req, res) => res.send({token: 123, auth: 1234}));
 app.post('/pay', (req, res)=> {
     console.log("req:");
     console.log(req.body);
-    payment.setUserData(req.body);
+    payment.setUserData(userData);
 
     payment.pay().then(result => {
         res.json({ result });
