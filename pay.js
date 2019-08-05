@@ -6,7 +6,7 @@ class Payment {
     this.data = null;
     this.URL_AUTH = 'https://api.paystand.co/v3/oauth/token';
     this.URL_PAYMENTS = 'https://api.paystand.co/v3/payments/secure';
-
+    this.CLIENT_ID = process.env.CLIENT_ID;
   }
 
   /**
@@ -66,7 +66,7 @@ class Payment {
    */ 
   _fetchKeys() {
     return {
-      client_id: '37c6d87c956acbb50f7502300c71dbe2',
+      CLIENT_ID,
       client_secret: 'dbc17981950c3ded3aea051110cc05d562659209',
       xCustomerId: 'ody8bd9st5qpq8619vj3j173'
     };
@@ -78,7 +78,7 @@ class Payment {
    */
   _authenticate() {
     const keys = this._fetchKeys();
-    const options = this._createTokenOptions(keys.client_id, keys.client_secret);
+    const options = this._createTokenOptions(keys.CLIENT_ID, keys.client_secret);
 
     return requestPromise.post(options)
       .then(tokenInfo => {
